@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.papb.catunganx">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Catungan">
+        <activity android:name=".SpendBank"></activity>
+        <activity android:name=".SpendCash" />
+        <activity android:name=".SpendActivity" />
+        <activity android:name=".InputBank" />
+        <activity android:name=".InputCash" />
+        <activity android:name=".SaveActivity" />
+        <activity android:name=".TotalActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

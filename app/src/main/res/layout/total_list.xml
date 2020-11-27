@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+<TextView
+    android:id="@+id/tempat_uang"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Cash"
+    android:textColor="@color/color4"
+    android:textSize="28sp"/>
+
+<TextView
+    android:id="@+id/banyak_uang"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/button_rounded"
+    android:layout_marginTop="12dp"
+    android:text="    Rp 1.000.000"
+    android:textColor="@color/color2"
+    android:textSize="28sp"
+    android:gravity="center_vertical"/>
+
+</LinearLayout>

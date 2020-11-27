@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_total"
+    android:padding="16dp"
+    tools:context=".TotalActivity">
+
+    <TextView
+        android:id="@+id/total_uang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Total Uang"
+        android:textColor="@color/color3"
+        android:textSize="28sp"/>
+
+    <TextView
+        android:id="@+id/jumlah_uang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_uang"
+        android:layout_marginTop="32dp"
+        android:text="Rp 1.000.000"
+        android:textColor="@color/color2"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text_total_cash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jumlah_uang"
+        android:layout_marginTop="100dp"
+        android:paddingLeft="24sp"
+        android:text="Cash"
+        android:textColor="@color/color4"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/text_total_cash"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_rounded1"/>
+
+    <TextView
+        android:id="@+id/total_cash"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/text_total_cash"
+        android:layout_margin="26dp"
+        android:layout_centerHorizontal="true"
+        android:text="Rp 500.000"
+        android:textSize="30sp"
+        android:textColor="@color/color2"/>
+
+    <TextView
+        android:id="@+id/text_total_bank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_cash"
+        android:layout_marginTop="24dp"
+        android:paddingLeft="24sp"
+        android:text="Bank"
+        android:textColor="@color/color4"
+        android:textSize="30sp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/text_total_bank"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_rounded1"/>
+
+    <TextView
+        android:id="@+id/total_bank"
+        android:layout_width="320dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/text_total_bank"
+        android:layout_margin="26dp"
+        android:layout_centerHorizontal="true"
+        android:text="Rp 500.000"
+        android:textSize="30sp"
+        android:textColor="@color/color2"/>
+
+</RelativeLayout>
