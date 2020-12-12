@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.contentcapture.DataShareWriteAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class InputCash extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class InputCash extends AppCompatActivity {
     public void saveCash(View view) {
         databaseHelper.addCash(Integer.parseInt(saveCashAmount.getText().toString()));
         Intent intent = new Intent(InputCash.this, MainActivity.class);
+        Toast toast = Toast.makeText(this, "Pemasukan berhasil ditambah!", Toast.LENGTH_LONG);
+        toast.show();
         startActivity(intent);
     }
 

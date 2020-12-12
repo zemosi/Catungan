@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SpendCash extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class SpendCash extends AppCompatActivity {
     public void spendCash(View view) {
         databaseHelper.addCashSpend(Integer.parseInt(spendCashAmount.getText().toString()));
         Intent intent = new Intent(SpendCash.this, MainActivity.class);
+        Toast toast = Toast.makeText(this, "Pengeluaran berhasil ditambah!", Toast.LENGTH_LONG);
+        toast.show();
         startActivity(intent);
     }
 }

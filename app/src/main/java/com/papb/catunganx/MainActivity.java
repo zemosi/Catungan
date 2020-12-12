@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     AppCompatButton totalButton;
     AppCompatButton saveButton;
     AppCompatButton spendButton;
+    AppCompatButton historyButton;
+    AppCompatButton resetButton;
     DatabaseHelper databaseHelper;
 
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         totalButton=findViewById(R.id.total_button);
         saveButton=findViewById(R.id.save_button);
         spendButton=findViewById(R.id.spend_button);
+        historyButton=findViewById(R.id.history_button);
+        resetButton=findViewById(R.id.limit_button);
 
         databaseHelper=new DatabaseHelper(this);
 
@@ -59,4 +64,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         total.setText(databaseHelper.totalMoney());
     }
+
+    public void openHistory(View view) {
+        Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+        startActivity(intent);
+    }
+
 }

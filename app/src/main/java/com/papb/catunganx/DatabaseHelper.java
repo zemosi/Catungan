@@ -6,12 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
+import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -159,5 +164,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return totalBank;
+    }
+
+
+    public ArrayList<History> getHistory() {
+        String method = "";
+        String amount = "";
+        String date = "";
+
+        ArrayList<History> historyList = new ArrayList<>();
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("IDR"));
+
+        String SELECT_ALL =
+                "SELECT * " +
+                        "FROM 'moneys' " +
+                        "ORDER BY 'money_id' DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(SELECT_ALL, null);
+        for (c.moveToLast(); !c.isBeforeFirst(); c.moveToPrevious()) {
+            if (c.getInt(c.getColumnIndex("type"))==1){
+                method = "Cash";
+            } else {
+                method = "Bank";
+            }
+            amount = String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
+            date = c.getString(c.getColumnIndex("date"));
+            historyList.add(new History(method,amount,date));
+        }
+
+        return historyList;
     }
 }
