@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class InputCash extends AppCompatActivity {
 
+    AppCompatButton back;
     EditText saveCashAmount;
     AppCompatButton saveCashButton;
     DatabaseHelper databaseHelper;
@@ -20,6 +21,7 @@ public class InputCash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_cash);
+        back=findViewById(R.id.back_button);
         saveCashAmount=findViewById(R.id.input_nominal_cash);
         saveCashButton=findViewById(R.id.submit_input_cash);
         databaseHelper=new DatabaseHelper(this);
@@ -33,4 +35,7 @@ public class InputCash extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void back(View view) {
+        finish();
+    }
 }

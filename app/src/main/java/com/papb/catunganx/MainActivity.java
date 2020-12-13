@@ -1,9 +1,13 @@
 package com.papb.catunganx;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         total=findViewById(R.id.text_uangTotal);
@@ -70,4 +76,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void resetAll(View view) {
+        showConfirmReset();
+
+    }
+
+    private void showConfirmReset(){
+        new AlertDialog.Builder(this)
+                .setTitle("Reset Catatan")
+                .setMessage("Anda yakin ingin menghapus catatan?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        databaseHelper.resetMoney();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("Tidak", null)
+                .show();
+    }
 }

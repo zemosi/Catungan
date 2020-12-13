@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pengeluaran"
+    android:padding="16dp"
     tools:context=".SpendCash">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back_button"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/back_arrow_white"
+        android:onClick="back"/>
 
     <TextView
         android:id="@+id/judul_pengeluaran"

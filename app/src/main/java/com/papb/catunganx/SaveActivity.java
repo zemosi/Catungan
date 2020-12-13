@@ -9,6 +9,7 @@ import android.view.View;
 
 public class SaveActivity extends AppCompatActivity {
 
+    AppCompatButton back;
     AppCompatButton cashButton;
     AppCompatButton bankButton;
 
@@ -16,6 +17,7 @@ public class SaveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
+        back=findViewById(R.id.back_button);
         cashButton=findViewById(R.id.cash_button_pemasukan);
         bankButton=findViewById(R.id.bank_button_pemasukan);
 
@@ -33,5 +35,9 @@ public class SaveActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void back(View view) {
+        finish();
     }
 }

@@ -8,10 +8,18 @@
     android:padding="16dp"
     tools:context=".TotalActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back_button"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/back_arrow_1"
+        android:onClick="back"/>
+
     <TextView
         android:id="@+id/total_uang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/back_button"
         android:layout_marginTop="32dp"
         android:text="Total Uang"
         android:textColor="@color/color3"
@@ -22,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/total_uang"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:text="Rp 1.000.000"
         android:textColor="@color/color2"
         android:textSize="32sp"
@@ -33,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/jumlah_uang"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:paddingLeft="24sp"
         android:text="Cash"
         android:textColor="@color/color4"
@@ -62,7 +70,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/total_cash"
-        android:layout_marginTop="24dp"
         android:paddingLeft="24sp"
         android:text="Bank"
         android:textColor="@color/color4"
@@ -85,5 +92,14 @@
         android:text="Rp 500.000"
         android:textSize="30sp"
         android:textColor="@color/color2"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bank_list"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_bank"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_rounded3"
+        android:paddingLeft="30dp" />
 
 </RelativeLayout>

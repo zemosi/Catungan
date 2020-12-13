@@ -34,8 +34,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE moneys (\n" +
                     "    money_id     INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                     "    amount INTEGER,\n" +
-                    "    date   DATETIME DEFAULT CURRENT_TIMESTAMP,\n" +
-                    "    type   INTEGER REFERENCES types (type_id) \n" +
+                    "    date   DATETIME DEFAULT (datetime('now', 'localtime')),\n" +
+                    "    type   INTEGER REFERENCES types (type_id), \n" +
+                    "    bank   VARCHAR\n" +
                     ");\n";
 
 
@@ -59,6 +60,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    public void resetMoney() {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS 'types'");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS 'moneys'");
+        onCreate(sqLiteDatabase);
+    }
+
     public long addCash(Integer nominal) {
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues values =new ContentValues();
@@ -68,11 +76,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insert;
     }
 
-    public long addBank(Integer nominal) {
+    public long addBank(String bank, Integer nominal) {
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues values =new ContentValues();
         values.put("amount", nominal);
         values.put("type", 2);
+        values.put("bank", bank);
         long insert = db.insert("moneys", null, values);
         return insert;
     }
@@ -86,11 +95,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insert;
     }
 
-    public long addBankSpend(Integer nominal) {
+    public long addBankSpend(String bank, Integer nominal) {
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues values =new ContentValues();
         values.put("amount", -nominal);
         values.put("type", 2);
+        values.put("bank", bank);
         long insert = db.insert("moneys", null, values);
         return insert;
     }
@@ -166,6 +176,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return totalBank;
     }
 
+    public int bankChecker(String bank){
+        int bankAmount = 0;
+
+        String SELECT_BANK_AMOUNT =
+                "SELECT SUM(amount) AS 'bankAmount'" +
+                        "FROM 'moneys'" +
+                        "WHERE moneys.bank == '"+bank+"'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(SELECT_BANK_AMOUNT,null);
+
+        if (c.moveToFirst()){
+            bankAmount = c.getInt(c.getColumnIndex("bankAmount"));
+        }
+
+        return bankAmount;
+    }
+
+    public String bankAmount(String bank){
+        String  bankAmount = "";
+        int total = 0;
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("IDR"));
+
+        String SELECT_BANK_AMOUNT =
+                "SELECT SUM(amount) AS 'bankAmount'" +
+                        "FROM 'moneys'" +
+                        "WHERE moneys.bank == '"+bank+"'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(SELECT_BANK_AMOUNT,null);
+
+        if (c.moveToFirst()){
+            total = c.getInt(c.getColumnIndex("bankAmount"));
+            bankAmount = String.valueOf(format.format(total));
+        }
+
+        return bankAmount;
+    }
+
 
     public ArrayList<History> getHistory() {
         String method = "";
@@ -189,9 +241,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (c.getInt(c.getColumnIndex("type"))==1){
                 method = "Cash";
             } else {
-                method = "Bank";
+                method = "Bank "+c.getString(c.getColumnIndex("bank"));
             }
-            amount = String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
+            if (c.getInt(c.getColumnIndex("amount"))>0){
+                amount = "+"+String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
+            } else {
+                amount = "-"+String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
+            }
+
             date = c.getString(c.getColumnIndex("date"));
             historyList.add(new History(method,amount,date));
         }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Catungan</string>
+    <string-array name="bank">
+        <item>BNI</item>
+        <item>Mandiri</item>
+        <item>BRI</item>
+        <item>BCA</item>
+        <item>Lain-lain</item>
+    </string-array>
 </resources>
