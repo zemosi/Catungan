@@ -26,6 +26,7 @@ public class SaveActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SaveActivity.this, InputCash.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.fade_in, R.anim.no_anim);
             }
         });
         bankButton.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +34,7 @@ public class SaveActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SaveActivity.this, InputBank.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.fade_in, R.anim.no_anim);
             }
         });
     }

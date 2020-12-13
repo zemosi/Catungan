@@ -46,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TotalActivity.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
+            }
+        });
+        total.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TotalActivity.class);
+                startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
             }
         });
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SaveActivity.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
             }
         });
         spendButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SpendActivity.class);
                 startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
             }
         });
 
@@ -74,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public void openHistory(View view) {
         Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
         startActivity(intent);
+        overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
     }
 
     public void resetAll(View view) {
