@@ -11,12 +11,16 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.Math.abs;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -91,6 +95,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values =new ContentValues();
         values.put("amount", -nominal);
         values.put("type", 1);
+        if (LimitActivity.LIMIT_INDICATOR==1){
+            LimitActivity.addSpendAmount(nominal);
+        }
         long insert = db.insert("moneys", null, values);
         return insert;
     }
@@ -101,6 +108,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("amount", -nominal);
         values.put("type", 2);
         values.put("bank", bank);
+        if (LimitActivity.LIMIT_INDICATOR==1){
+            LimitActivity.addSpendAmount(nominal);
+        }
         long insert = db.insert("moneys", null, values);
         return insert;
     }
@@ -246,7 +256,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (c.getInt(c.getColumnIndex("amount"))>0){
                 amount = "+"+String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
             } else {
-                amount = "-"+String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
+                amount = String.valueOf(format.format(c.getInt(c.getColumnIndex("amount"))));
             }
 
             date = c.getString(c.getColumnIndex("date"));
@@ -254,5 +264,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return historyList;
+    }
+
+    public int getLimit(){
+        int limitAmount = 0;
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("IDR"));
+
+        String SELECT_LIMIT =
+                "SELECT amount " +
+                        "FROM 'moneys'" +
+                        "WHERE moneys.amount < 0";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(SELECT_LIMIT,null);
+
+        if (c.moveToFirst()){
+            limitAmount = abs(c.getInt(c.getColumnIndex("limitAmount")));
+        }
+
+        return limitAmount;
+
     }
 }

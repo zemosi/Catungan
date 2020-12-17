@@ -57,9 +57,19 @@ public class SpendBank extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Pengeluaran berhasil ditambah!", Toast.LENGTH_LONG);
         toast.show();
         startActivity(intent);
+        overridePendingTransition( R.anim.slide_in_left, R.anim.no_anim);
     }
 
     public void back(View view) {
-        finish();
+        Intent intent = new Intent(SpendBank.this, SpendActivity.class);
+        startActivity(intent);
+        overridePendingTransition( R.anim.fade_in, R.anim.no_anim);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SpendBank.this, SpendActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.no_anim);
     }
 }

@@ -13,9 +13,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Currency;
+import java.util.Date;
+
+import static java.time.LocalDate.*;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView total;
+    TextView limit;
+    TextView overLimit;
     AppCompatButton totalButton;
     AppCompatButton saveButton;
     AppCompatButton spendButton;
@@ -31,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         total=findViewById(R.id.text_uangTotal);
+        limit=findViewById(R.id.limit_text);
+        overLimit=findViewById(R.id.overlimit_text);
         totalButton=findViewById(R.id.total_button);
         saveButton=findViewById(R.id.save_button);
         spendButton=findViewById(R.id.spend_button);
@@ -40,6 +52,24 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper=new DatabaseHelper(this);
 
         total.setText(databaseHelper.totalMoney());
+
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        format.setMaximumFractionDigits(0);
+        format.setCurrency(Currency.getInstance("IDR"));
+
+        if (LimitActivity.LIMIT_INDICATOR == 1){
+            if (LimitActivity.SPEND_AMOUNT <= LimitActivity.LIMIT_AMOUNT){
+                limit.setVisibility(View.VISIBLE);
+                limit.setText("Batas pengeluaran Anda\n" +
+                        String.valueOf(format.format(LimitActivity.SPEND_AMOUNT)) +
+                        " / " +
+                        String.valueOf(format.format(LimitActivity.LIMIT_AMOUNT)));
+            } else  {
+                overLimit.setVisibility(View.VISIBLE);
+                overLimit.setText("Pengeluaran Anda melebihi batas\n" +
+                        String.valueOf(format.format(LimitActivity.LIMIT_AMOUNT)));
+            }
+        }
 
         totalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,24 +118,15 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
     }
 
-    public void resetAll(View view) {
-        showConfirmReset();
 
+    public void openSettings(View view) {
+        Intent intent = new Intent(MainActivity.this, LimitActivity.class);
+        startActivity(intent);
+        overridePendingTransition( R.anim.slide_in_right, R.anim.no_anim);
     }
 
-    private void showConfirmReset(){
-        new AlertDialog.Builder(this)
-                .setTitle("Reset Catatan")
-                .setMessage("Anda yakin ingin menghapus catatan?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        databaseHelper.resetMoney();
-                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("Tidak", null)
-                .show();
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
     }
 }

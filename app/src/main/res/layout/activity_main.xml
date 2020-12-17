@@ -45,6 +45,33 @@
         android:textColor="@color/color1"
         android:textSize="28sp"/>
 
+    <TextView
+        android:id="@+id/limit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_uangTotal"
+        android:layout_marginTop="86dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:text="Batas pengeluaran Anda\nIDR10,000 / IDR300,000"
+        android:textColor="@color/color5"
+        android:textSize="16sp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/overlimit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_uangTotal"
+        android:layout_marginTop="86dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:text="Pengeluaran Anda melebihi batas\nIDR300,000"
+        android:textColor="@color/color6"
+        android:textSize="16sp"
+        android:visibility="invisible"/>
+
+
     <ImageView
         android:id="@+id/piggybox"
         android:layout_width="320dp"
@@ -72,8 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/save_button"
-        android:layout_marginStart="78dp"
-        android:layout_marginLeft="78dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
         android:text="Pemasukan"
         android:textColor="@color/color3"/>
 
@@ -96,8 +123,8 @@
         android:layout_below="@id/save_button"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="78dp"
-        android:layout_marginRight="78dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginRight="70dp"
         android:text="Pengeluaran"
         android:textColor="@color/color3"/>
     
@@ -119,8 +146,8 @@
         android:layout_below="@id/history_button"
         android:background="@color/color4"
         android:layout_marginTop="16dp"
-        android:text="Reset Catatan"
+        android:text="Pengaturan"
         android:textColor="@color/color3"
-        android:onClick="resetAll"/>
+        android:onClick="openSettings"/>
 
 </RelativeLayout>

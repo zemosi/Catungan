@@ -13,5 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/color3</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/black</item>
+        <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>
+        <item name="buttonStyle">@style/PoppinsButtonStyle</item>
+    </style>
+    <style name="PoppinsTextViewStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+    <style name="PoppinsButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 </resources>

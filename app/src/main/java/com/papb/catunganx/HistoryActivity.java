@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -38,6 +39,15 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void back(View view) {
-        finish();
+        Intent intent = new Intent(HistoryActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition( R.anim.slide_in_left, R.anim.no_anim);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HistoryActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.no_anim);
     }
 }
